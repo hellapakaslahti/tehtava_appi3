@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="fi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tehtävälista Pro</title>
+    <meta name="description" content="Ammattimainen ja saavutettava tehtävälista mobiilikäyttöön.">
+    
+    <!-- PWA asetukset -->
+    <link rel="manifest" href="manifest.json">
+    <meta name="theme-color" content="#2563eb">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="default">
+    <link rel="apple-touch-icon" href="icons/icon-192.svg">
+    
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div id="app-container">
+        <header>
+            <h1>Tehtävät</h1>
+        </header>
+
+        <main>
+            <section id="input-section">
+                <form id="todo-form" novalidate>
+                    <div class="input-group">
+                        <label for="todo-input" class="sr-only">Uusi tehtävä</label>
+                        <input type="text" id="todo-input" placeholder="Mitä pitää tehdä?" maxlength="100" autocomplete="off">
+                        <button type="submit" id="add-btn" title="Lisää tehtävä">
+                            <span aria-hidden="true">+</span>
+                            <span class="sr-only">Lisää tehtävä</span>
+                        </button>
+                    </div>
+                    <p id="error-message" class="error-text" aria-live="assertive"></p>
+                </form>
+            </section>
+
+            <nav id="filter-nav" aria-label="Tehtävien suodatus">
+                <button class="filter-btn active" data-filter="all">Kaikki</button>
+                <button class="filter-btn" data-filter="active">Aktiiviset</button>
+                <button class="filter-btn" data-filter="completed">Tehdyt</button>
+            </nav>
+
+            <section id="list-section">
+                <ul id="todo-list" aria-label="Tehtävälista">
+                    <!-- JS generoi sisällön -->
+                </ul>
+                <div id="empty-state" class="hidden">
+                    <p>Ei tehtäviä täällä.</p>
+                    <small>Kirjoita tehtävä yläpuolelle ja paina plussaa.</small>
+                </div>
+            </section>
+        </main>
+
+        <!-- Muokkaus-moduuli -->
+        <div id="edit-modal" class="modal hidden" role="dialog" aria-modal="true" aria-labelledby="modal-title">
+            <div class="modal-content">
+                <h2 id="modal-title">Muokkaa tehtävää</h2>
+                <label for="edit-input" class="sr-only">Tehtävän uusi teksti</label>
+                <input type="text" id="edit-input" maxlength="100">
+                <div class="modal-actions">
+                    <button id="cancel-edit" class="secondary-btn">Peruuta</button>
+                    <button id="save-edit" class="primary-btn">Tallenna</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Vahvistus-moduuli -->
+        <div id="confirm-modal" class="modal hidden" role="dialog" aria-modal="true" aria-labelledby="confirm-title">
+            <div class="modal-content">
+                <h2 id="confirm-title">Poistetaanko tehtävä?</h2>
+                <p>Toimintoa ei voi kumota.</p>
+                <div class="modal-actions">
+                    <button id="cancel-delete" class="secondary-btn">Peruuta</button>
+                    <button id="confirm-delete" class="danger-btn">Poista</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="app.js"></script>
+    <script>
+        if ('serviceWorker' in navigator) {
+            window.addEventListener('load', () => {
+                navigator.serviceWorker.register('service-worker.js')
+                    .then(reg => console.log('SW valmis'))
+                    .catch(err => console.error('SW virhe', err));
+            });
+        }
+    </script>
+</body>
+</html>

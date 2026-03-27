@@ -1,0 +1,235 @@
+:root {
+    --primary: #2563eb;
+    --primary-dark: #1d4ed8;
+    --bg: #f8fafc;
+    --card: #ffffff;
+    --text: #1e293b;
+    --text-muted: #64748b;
+    --border: #cbd5e1;
+    --success: #16a34a;
+    --danger: #dc2626;
+    --shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1);
+    --radius: 12px;
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    -webkit-tap-highlight-color: transparent;
+}
+
+body {
+    font-family: -apple-system, system-ui, sans-serif;
+    background-color: var(--bg);
+    color: var(--text);
+    line-height: 1.5;
+    display: flex;
+    justify-content: center;
+    min-height: 100vh;
+}
+
+#app-container {
+    width: 100%;
+    max-width: 500px;
+    padding: 16px;
+}
+
+/* Saavutettavuus: Focus-tyylit */
+input:focus-visible, button:focus-visible, [tabindex="0"]:focus-visible {
+    outline: 3px solid var(--primary);
+    outline-offset: 2px;
+}
+
+input:focus, button:focus {
+    outline: none;
+}
+
+header {
+    padding: 16px 0 24px;
+    text-align: left;
+}
+
+header h1 {
+    font-size: 1.875rem;
+    font-weight: 800;
+    color: var(--text);
+}
+
+.input-group {
+    display: flex;
+    gap: 12px;
+}
+
+input[type="text"] {
+    flex: 1;
+    padding: 14px;
+    border: 2px solid var(--border);
+    border-radius: var(--radius);
+    font-size: 16px;
+    transition: border-color 0.2s;
+}
+
+#add-btn {
+    width: 54px;
+    height: 54px;
+    background: var(--primary);
+    color: white;
+    border: none;
+    border-radius: var(--radius);
+    font-size: 28px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.error-text {
+    color: var(--danger);
+    font-size: 14px;
+    margin-top: 8px;
+    min-height: 20px;
+    font-weight: 500;
+}
+
+#filter-nav {
+    display: flex;
+    background: #e2e8f0;
+    padding: 4px;
+    border-radius: 10px;
+    margin-bottom: 24px;
+}
+
+.filter-btn {
+    flex: 1;
+    padding: 10px;
+    border: none;
+    background: transparent;
+    border-radius: 8px;
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--text-muted);
+    cursor: pointer;
+}
+
+.filter-btn.active {
+    background: var(--card);
+    color: var(--primary);
+    box-shadow: 0 1px 2px rgba(0,0,0,0.1);
+}
+
+.todo-item {
+    background: var(--card);
+    padding: 14px;
+    border-radius: var(--radius);
+    margin-bottom: 12px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    box-shadow: var(--shadow);
+}
+
+.todo-checkbox {
+    width: 28px;
+    height: 28px;
+    border: 2px solid var(--border);
+    border-radius: 50%;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+}
+
+.todo-item.completed .todo-checkbox {
+    background: var(--success);
+    border-color: var(--success);
+}
+
+.todo-item.completed .todo-checkbox::after {
+    content: "✓";
+    color: white;
+    font-weight: bold;
+}
+
+.todo-text {
+    flex: 1;
+    font-size: 16px;
+    color: var(--text);
+}
+
+.todo-item.completed .todo-text {
+    text-decoration: line-through;
+    color: var(--text-muted);
+}
+
+.action-btn {
+    width: 40px;
+    height: 40px;
+    background: #f1f5f9;
+    border: none;
+    border-radius: 8px;
+    font-size: 18px;
+    cursor: pointer;
+    color: var(--text-muted);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.delete-btn:hover, .delete-btn:focus-visible {
+    background: #fee2e2;
+    color: var(--danger);
+}
+
+.modal {
+    position: fixed;
+    inset: 0;
+    background: rgba(15, 23, 42, 0.7);
+    backdrop-filter: blur(4px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1000;
+    padding: 20px;
+}
+
+.modal-content {
+    background: var(--card);
+    padding: 24px;
+    border-radius: 16px;
+    width: 100%;
+    max-width: 400px;
+}
+
+.modal-actions {
+    display: flex;
+    gap: 12px;
+    margin-top: 20px;
+}
+
+.modal-actions button {
+    flex: 1;
+    padding: 14px;
+    border-radius: 10px;
+    border: none;
+    font-weight: 700;
+    cursor: pointer;
+}
+
+.primary-btn { background: var(--primary); color: white; }
+.secondary-btn { background: #e2e8f0; color: var(--text); }
+.danger-btn { background: var(--danger); color: white; }
+
+.sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    border: 0;
+}
+
+.hidden { display: none !important; }
